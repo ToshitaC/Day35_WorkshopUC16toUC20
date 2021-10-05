@@ -1,6 +1,8 @@
 package com.addressbook;
 
 import static org.junit.Assert.assertEquals;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import com.blz.AddressBookServiceDB;
@@ -32,5 +34,10 @@ public class TestAddressBookService {
         boolean isSynced = serviceObj.isAddressBookSyncedWithDB("Toshita");
 
         assertTrue(isSynced);
+    }
+    @Test
+    public void givenDateRange_WhenRetrieved_ShouldMatchContactsCount() throws DBServiceException{
+        contactsList = serviceObj.viewContactsByDateRange(LocalDate.of(2021,04,17), LocalDate.now() );
+        assertEquals(3, contactsList.size());
     }
 }
