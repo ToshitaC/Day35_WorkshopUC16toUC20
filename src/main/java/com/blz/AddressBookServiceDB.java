@@ -2,7 +2,9 @@ package com.blz;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddressBookServiceDB {
     Contacts contactObj = null;
@@ -124,7 +126,7 @@ public class AddressBookServiceDB {
             while(resultSet.next())
             {
                 int id = resultSet.getInt(1);
-                String fisrtName = resultSet.getString(2);
+                String firstName = resultSet.getString(2);
                 String lastName = resultSet.getString(3);
                 String addressName = resultSet.getString(4);
                 String addressType = resultSet.getString(5);
@@ -134,7 +136,7 @@ public class AddressBookServiceDB {
                 String zip = resultSet.getString(9);
                 String phoneNumber = resultSet.getString(10);
                 String email = resultSet.getString(11);
-                contactObj = new Contacts(id,fisrtName,lastName,addressName,addressType,address,city,state,zip,phoneNumber,email);
+                contactObj = new Contacts(id,firstName,lastName,addressName,addressType,address,city,state,zip,phoneNumber,email);
                 contactsListByStartDate.add(contactObj);
             }
         } catch (Exception e) {
@@ -142,4 +144,21 @@ public class AddressBookServiceDB {
         }
         return contactsListByStartDate;
     }
+    public Map<String,Integer> countContactsByCityOrState(String column) throws DBServiceException
+    {
+        Map<String,Integer> contactsCount = new HashMap<>();
+        String query = String.format("select %s , count(%s) from address_book group by %s;" , column,column,column);
+        try(Connection con = JDBC.getConnection()) {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                contactsCount.put(resultSet.getString(1), resultSet.getInt(2));
+            }
+        }catch (Exception e) {
+            throw new DBServiceException("SQL Exception", DBServiceExceptionType.SQL_EXCEPTION);
+        }
+        return contactsCount;
+    }
+
 }
