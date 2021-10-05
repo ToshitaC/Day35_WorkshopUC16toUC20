@@ -74,8 +74,8 @@ public class Contacts {
     public void setAddress_name(String address_name) {
         this.address_name = address_name;
     }
-    public Contacts(int id,String firstName,String lastName,String address_name,String addressType,
-                    String address,String cityName,String stateName,String zipCode,String phoneNumber, String emailId) {
+    public Contacts(String id, String firstName, String lastName, String address_name, String addressType,
+                    String address, String cityName, String stateName, String zipCode, String phoneNumber, String emailId) {
         super();
         this.id = id;
         this.firstName = firstName;

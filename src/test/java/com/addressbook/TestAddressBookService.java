@@ -65,4 +65,11 @@ public class TestAddressBookService {
         assertEquals(1, contactsCount.get("Aurangabad"), 0);
         assertEquals(1, contactsCount.get("Dombivli"), 0);
     }
+    @Test
+    public void givenContactData_WhenAddedToDB_ShouldSyncWithDB() throws DBServiceException {
+        serviceObj.insertNewContactToDB("Riya","Badhe","Friend_Book","Friend","68/1 Srishti Complex","Kalyan",
+                "MH","897654","8734120000","lmn@gmail.com","2021-10-05");
+        boolean isSynced = serviceObj.isAddressBookSyncedWithDB("Riya");
+        assertTrue(isSynced);
+    }
 }
