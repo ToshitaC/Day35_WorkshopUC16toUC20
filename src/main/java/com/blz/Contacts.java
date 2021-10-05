@@ -98,12 +98,69 @@ public class Contacts {
                 + stateName + ", phoneNumber=" + phoneNumber + ", addressType=" + addressType + ", address_name="
                 + address_name + "]";
     }
+    @Override
     public boolean equals(Object obj) {
-        Contacts conObj = (Contacts)obj;
-        if (conObj.getFirstName().equals(this.firstName) && conObj.getLastName().equals(this.lastName) )
+        if (this == obj)
             return true;
-        else
+        if (obj == null)
             return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Contacts other = (Contacts) obj;
+        if (address == null) {
+            if (other.address != null)
+                return false;
+        } else if (!address.equals(other.address))
+            return false;
+        if (addressType == null) {
+            if (other.addressType != null)
+                return false;
+        } else if (!addressType.equals(other.addressType))
+            return false;
+        if (address_name == null) {
+            if (other.address_name != null)
+                return false;
+        } else if (!address_name.equals(other.address_name))
+            return false;
+        if (cityName == null) {
+            if (other.cityName != null)
+                return false;
+        } else if (!cityName.equals(other.cityName))
+            return false;
+        if (emailId == null) {
+            if (other.emailId != null)
+                return false;
+        } else if (!emailId.equals(other.emailId))
+            return false;
+        if (firstName == null) {
+            if (other.firstName != null)
+                return false;
+        } else if (!firstName.equals(other.firstName))
+            return false;
+        if (id != other.id)
+            return false;
+        if (lastName == null) {
+            if (other.lastName != null)
+                return false;
+        } else if (!lastName.equals(other.lastName))
+            return false;
+        if (phoneNumber == null) {
+            if (other.phoneNumber != null)
+                return false;
+        } else if (!phoneNumber.equals(other.phoneNumber))
+            return false;
+        if (stateName == null) {
+            if (other.stateName != null)
+                return false;
+        } else if (!stateName.equals(other.stateName))
+            return false;
+        if (zipCode == null) {
+            if (other.zipCode != null)
+                return false;
+        } else if (!zipCode.equals(other.zipCode))
+            return false;
+        return true;
     }
+
 }
 

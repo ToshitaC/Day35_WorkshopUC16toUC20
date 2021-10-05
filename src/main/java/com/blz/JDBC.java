@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class JDBC {
-    static String url = "jdbc:mysql://localhost:3306/AddressBook_System1&allowPublicKeyRetrieval=true&useSSL=false";
+    static String url = "jdbc:mysql://localhost:3306/AddressBook_System1&useSSL=false";
     static String userName = "root";
     static String password = "Toshita@17";
     private static Connection con = null;

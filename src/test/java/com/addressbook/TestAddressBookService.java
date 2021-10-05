@@ -8,6 +8,7 @@ import com.blz.Contacts;
 import com.blz.DBServiceException;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 public class TestAddressBookService {
     static AddressBookServiceDB serviceObj;
@@ -23,5 +24,13 @@ public class TestAddressBookService {
     public void givenAddressBookDB_WhenRetrieved_ShouldMatchContactsCount() throws DBServiceException {
         contactsList = serviceObj.viewAddressBook();
         assertEquals(8, contactsList.size());
+    }
+
+    @Test
+    public void givenUpdatedContacts_WhenRetrieved_ShouldBeSyncedWithDB() throws DBServiceException{
+        serviceObj.updateContactDetails("MH" , "834008" , "Toshita");
+        boolean isSynced = serviceObj.isAddressBookSyncedWithDB("Toshita");
+
+        assertTrue(isSynced);
     }
 }
